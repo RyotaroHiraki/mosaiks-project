@@ -1,5 +1,5 @@
 dataset/
 
-script/
 .DS_Store
-DS.Store
+
+.Rhistory
