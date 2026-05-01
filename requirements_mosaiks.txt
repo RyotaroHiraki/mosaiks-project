@@ -1,0 +1,17 @@
+mosaiks==1.0.2
+geopandas
+torch
+dask[complete]
+distributed
+dask-geopandas
+stackstac
+pystac
+pystac-client
+planetary-computer
+rasterio
+shapely
+pyproj
+pandas
+numpy
+xarray
+rioxarray
