@@ -1,0 +1,26 @@
+University driving-time client bundle
+
+Scope: 2,447 PUMA origins in the contiguous 48 states plus Washington, D.C.
+Destinations: existing nearest colleges, not reselected by driving time.
+Coordinate source: dataset/cleaned_dataset/puma_nearest_college_driving_pairs.parquet
+College coordinates were checked against the current CPS input files.
+Origins are the previously prepared representative points (not recomputed here).
+
+This bundle contains coordinates and Python code, not road data or OSRM.
+Before calculation, prepare and start OSRM with a car profile and road coverage
+for the study area. The university host/runtime/job configuration is pending.
+On HPC, execute routing and road preparation inside an allocated compute job.
+
+In an approved Python environment, from this folder:
+  python -m pip install -r requirements.txt
+  python 02_create_driving_time.py --pairs-file pairs.parquet --contiguous-only --output-dir results --osrm-url http://127.0.0.1:5050
+
+Change the URL to the actual OSRM address. Seconds are saved in:
+  results/puma_nearest_college_driving_time.parquet
+
+Copy the results folder back to the Mac for review and person-level merging.
+Snap distances must be reviewed; status=ok only means OSRM returned a value.
+This client checkpoints every 100 rows but does not automatically resume.
+Rerunning queries all rows and replaces its outputs.
+Record the OSM snapshot, preprocessing commands, car profile, and OSRM version
+alongside the output. This bundle does not submit jobs or start a server.
